@@ -1,6 +1,7 @@
 package be.pxl.services.services;
 
 import be.pxl.services.domain.Department;
+import be.pxl.services.domain.Employee;
 import be.pxl.services.domain.dto.DepartmentRequest;
 import be.pxl.services.domain.dto.DepartmentResponse;
 import be.pxl.services.repository.DepartmentRepository;
@@ -54,19 +55,7 @@ public class DepartmentService implements IDepartmentService {
                 .id(department.getId())
                 .organizationId(department.getOrganizationId())
                 .name(department.getName())
-                .employees(department.getEmployees().stream().map(this::mapEmployeeToEmployeeResponse).toList())
                 .position(department.getPosition())
-                .build();
-    }
-
-    public EmployeeResponse mapEmployeeToEmployeeResponse(Employee employee) {
-        return EmployeeResponse.builder()
-                .id(employee.getId())
-                .age(employee.getAge())
-                .name(employee.getName())
-                .departmentId(employee.getDepartmentId())
-                .organizationId(employee.getOrganizationId())
-                .position(employee.getPosition())
                 .build();
     }
 }

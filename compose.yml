@@ -1,0 +1,22 @@
+services:
+  mysql-emp:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: employeeservice_db
+    ports:
+      - "3306:3306"
+  mysql-dep:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: departmentservice_db
+    ports:
+      - "3307:3306"
+  mysql-org:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: organizationservice_db
+    ports:
+      - "3308:3306"
