@@ -28,6 +28,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public List<EmployeeResponse> getAllEmployees() {
+        rabbitTemplate.convertAndSend("notification-queue", "MESSAGE MESSAGE MESSAGE getting employees employee");
         return employeeRepository.findAll().stream().map(this::mapEmployeeToEmployeeResponse).toList();
     }
 
@@ -38,7 +39,6 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public EmployeeResponse addEmployee(EmployeeRequest employeeRequest) {
-        rabbitTemplate.convertAndSend("notification-queue", "adding an employee");
         Employee employee = Employee.builder()
                 .age(employeeRequest.getAge())
                 .name(employeeRequest.getName())
