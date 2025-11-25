@@ -6,25 +6,39 @@ import be.pxl.services.domain.NotificationRequest;
 import be.pxl.services.domain.dto.EmployeeRequest;
 import be.pxl.services.domain.dto.EmployeeResponse;
 import be.pxl.services.repository.EmployeeRepository;
+import com.netflix.discovery.converters.Auto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EmployeeService implements IEmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final NotificationClient notificationClient;
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     @Override
     public List<EmployeeResponse> getAllEmployees() {
         return employeeRepository.findAll().stream().map(this::mapEmployeeToEmployeeResponse).toList();
     }
 
+    @RabbitListener(queues="notification-queue")
+    public void listen(String in) {
+        log.info(in);
+    }
+
     @Override
     public EmployeeResponse addEmployee(EmployeeRequest employeeRequest) {
+        rabbitTemplate.convertAndSend("notification-queue", "adding an employee");
         Employee employee = Employee.builder()
                 .age(employeeRequest.getAge())
                 .name(employeeRequest.getName())
