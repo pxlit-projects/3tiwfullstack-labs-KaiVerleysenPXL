@@ -1,0 +1,5 @@
+2025-11-25T11:30:05.917+0100 INFO               [main]                         be.pxl.services.EmployeeServiceApplication - Starting EmployeeServiceApplication using Java 21.0.6 with PID 46528 (C:\huiswerk3_repos\Java\backendlabs\SpringCloudPXL\employee-service\target\classes started by Kai in C:\huiswerk3_repos\Java\backendlabs\SpringCloudPXL)
+2025-11-25T11:30:05.918+0100 DEBUG              [main]                         be.pxl.services.EmployeeServiceApplication - Running with Spring Boot v3.5.6, Spring v6.2.11
+2025-11-25T11:30:05.920+0100 INFO               [main]                         be.pxl.services.EmployeeServiceApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-25T11:30:12.310+0100 INFO               [main]                         be.pxl.services.EmployeeServiceApplication - Started EmployeeServiceApplication in 7.806 seconds (process running for 8.9)
+2025-11-25T11:31:53.275+0100 INFO               [http-nio-8081-exec-1]         be.pxl.services.api.EmployeeController - logging this
